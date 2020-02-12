@@ -15,7 +15,7 @@ import torch.utils.data.distributed
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.models as models
-import pyramidnet_pono as PYRM_PONO
+import pyramidnet_moex as PYRM_MOEX
 import utils
 import numpy as np
 
@@ -60,10 +60,10 @@ parser.add_argument('--beta', default=0, type=float,
                     help='hyperparameter beta')
 parser.add_argument('--cutmix_prob', default=0, type=float,
                     help='cutmix probability')
-parser.add_argument('--pono_prob', default=0, type=float,
-                    help='pono_probability')
+parser.add_argument('--moex_prob', default=0, type=float,
+                    help='moex_probability')
 parser.add_argument('--lam', default=0, type=float,
-                    help='feature mix probability')
+                    help='moex probability')
 
 parser.set_defaults(bottleneck=True)
 parser.set_defaults(verbose=True)
@@ -157,18 +157,8 @@ def main():
         raise Exception('unknown dataset: {}'.format(args.dataset))
 
     print("=> creating model '{}'".format(args.net_type))
-    if args.net_type == 'resnet':
-        model = RN.ResNet(args.dataset, args.depth, numberofclass, args.bottleneck)  # for ResNet
-    elif args.net_type == 'resnet_pono':
-        model = RN_PONO.ResNet(args.dataset, args.depth, numberofclass, args.bottleneck)  # for ResNet
-    elif args.net_type == 'pyramidnet':
-        model = PYRM.PyramidNet(args.dataset, args.depth, args.alpha, numberofclass,
-                                args.bottleneck)
-    elif args.net_type == 'pyramidnet_pono':
-        model = PYRM_PONO.PyramidNet(args.dataset, args.depth, args.alpha, numberofclass,
-                                args.bottleneck)
-    elif args.net_type == 'pyramidnet_shakedrop_pono':
-        model = PYRM_ShakePONO.PyramidNet(args.dataset, args.depth, args.alpha, numberofclass,
+    if args.net_type == 'pyramidnet_moex':
+        model = PYRM_MOEX.PyramidNet(args.dataset, args.depth, args.alpha, numberofclass,
                                 args.bottleneck)
     else:
         raise Exception('unknown network architecture: {}'.format(args.net_type))
@@ -215,7 +205,7 @@ def main():
             'optimizer': optimizer.state_dict(),
         }, is_best)
 
-    f = open('train_pono.txt', 'a+')
+    f = open('train_moex.txt', 'a+')
     f.write('lam = ' + str(args.lam) + ': Best accuracy (top-1 and 5 error):' + str(best_err1) + ', ' + str(best_err5))
     print('Best accuracy (top-1 and 5 error):', best_err1, best_err5)
     f.close()
@@ -242,7 +232,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
         target = target.cuda()
 
         r = np.random.rand(1)
-        if r < args.pono_prob:
+        if r < args.moex_prob:
             # generate mixed sample
             rand_index = torch.randperm(input.size()[0]).cuda()
             target_a = target
