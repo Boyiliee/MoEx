@@ -14,4 +14,4 @@ python train_pono.py \
     --expname ${JOB} \
     --epochs ${epoch} \
     --beta 1.0 \
-    --lam ${lam} --pono_prob ${prob}
+    --lam ${lam} --moex_prob ${prob}
