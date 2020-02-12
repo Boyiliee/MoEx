@@ -4,7 +4,7 @@ epoch=300
 lam=0.5
 prob=0.25
 
-python train_pono.py \
+python train_moex.py \
     --net_type pyramidnet_moex \
     --dataset ${DATA} \
     --depth 200 \
