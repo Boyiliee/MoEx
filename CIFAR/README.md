@@ -6,7 +6,7 @@ We train PyramidNet-200 with simple MoEx based on [Cutmix Official Code](https:/
 This code was tested on the following versions, but they may not be necessary.
 ```
 Python3
-torch>=1.0
+PyTorch>=1.0
 torchvision>=0.2
 Numpy
 ```
