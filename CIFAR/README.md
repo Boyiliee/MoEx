@@ -12,7 +12,7 @@ Numpy
 ```
 
 ## Training a CIFAR with MoEx 
-Here we show an example of training Pyramidnet-200 with MoEx using PONO to extract the moments. The exchange probability $p$ is set to 0.5 and the interpolation weight $\lambda$ is set to 0.2. Please refer to [run.sh](https://github.com/Boyiliee/MoEx/blob/master/CIFAR/run.sh) for details.
+Here we show an example of training Pyramidnet-200 with MoEx using PONO to extract the moments. The exchange probability $p$ is set to 0.25 and the interpolation weight $\lambda$ is set to 0.5. Please refer to [run.sh](https://github.com/Boyiliee/MoEx/blob/master/CIFAR/run.sh) for details.
 
 ```sh
 bash run.sh
