@@ -17,9 +17,9 @@ This repo contains the PyTorch implementation of Moment Exchange (MoEx), describ
 
 If you find this repo useful, please cite:
 ```
-@article{li2020on,
+@article{li2020feature,
   title={On Feature Normalization and Data Augmentation},
-  author={Li, Boyi and Wu, Felix and Lim, Ser-Nam and Belongie, Serge and Weinberger, Kilian Q.},
+  author={Li, Boyi and Wu, Felix and Lim, Ser-Nam and Belongie, Serge and Weinberger, Kilian Q},
   journal={arXiv preprint arXiv:2002.11102},
   year={2020}
 }
