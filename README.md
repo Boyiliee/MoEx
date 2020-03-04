@@ -1,4 +1,4 @@
-# MoEx
+# MoEx (Moment Exchange)
 The official PyTorch implementation of the paper [On Feature Normalization and Data Augmentation](https://arxiv.org/abs/2002.11102)
 
 #### Authors: 
