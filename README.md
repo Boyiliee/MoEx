@@ -1,5 +1,5 @@
 # MoEx (Moment Exchange)
-The official PyTorch implementation of the paper [On Feature Normalization and Data Augmentation](https://arxiv.org/abs/2002.11102)
+The official PyTorch implementation of the paper [On Feature Normalization and Data Augmentation](https://arxiv.org/abs/2002.11102).
 
 #### Authors: 
 * [Boyi Li](https://sites.google.com/site/boyilics/home)*
@@ -16,7 +16,7 @@ This repo contains the PyTorch implementation of Moment Exchange (MoEx), describ
 ![](./figs/fig1.jpg)
 
 #### Usage
-Please follow the instructions in the `README.md` in each subfolder to run experiments with MoEx on [CIFAR](./CIFAR) and [ImageNet](./ImageNet)
+Please follow the instructions in the `README.md` in each subfolder to run experiments with MoEx on [CIFAR](./CIFAR), [ImageNet](./ImageNet), and [ModelNet10/40](./ModelNet).
 
 More information and relevant applications will be updated.
 
