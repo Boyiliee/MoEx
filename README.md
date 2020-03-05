@@ -13,7 +13,12 @@ The official PyTorch implementation of the paper [On Feature Normalization and D
 ### Overview
 This repo contains the PyTorch implementation of Moment Exchange (MoEx), described in the paper [On Feature Normalization and Data Augmentation](https://arxiv.org/abs/2002.11102). For ImageNet and CIFAR experiments, we select [Positional Normalization (PONO)](https://github.com/Boyiliee/PONO) as the feature normalization method. 
 
-#### More information and relevant applications will be updated.
+![](./figs/fig1.jpg)
+
+#### Usage
+Please follow the instructions in the `README.md` in each subfolder to run experiments with MoEx on [CIFAR](./CIFAR) and [ImageNet](./ImageNet)
+
+More information and relevant applications will be updated.
 
 If you find this repo useful, please cite:
 ```
