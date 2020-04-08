@@ -192,20 +192,20 @@ class MoExResNet(nn.Module):
         x = self.maxpool(x)
 
         if ex_index is not None and moex_layer == 'stem':
-            moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
+            x = moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
         
         x = self.layer1(x)
         if ex_index is not None and moex_layer == 'C2':
-            moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
+            x = moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
         x = self.layer2(x)
         if ex_index is not None and moex_layer == 'C3':
-            moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
+            x = moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
         x = self.layer3(x)
         if ex_index is not None and moex_layer == 'C4':
-            moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
+            x = moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
         x = self.layer4(x)
         if ex_index is not None and moex_layer == 'C5':
-            moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
+            x = moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
 
         x = self.avgpool(x)
         x = torch.flatten(x, 1)

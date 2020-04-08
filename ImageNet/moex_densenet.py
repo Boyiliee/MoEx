@@ -190,7 +190,7 @@ class MoExDenseNet(nn.Module):
         for name, m in self.features.named_children():
             x = m(x)
             if ex_index is not None and moex_layer == name:
-                moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
+                x = moex(x, ex_index, moex_norm, moex_epsilon, moex_positive_only)
         features = x
         out = F.relu(features, inplace=True)
         out = F.adaptive_avg_pool2d(out, (1, 1))
