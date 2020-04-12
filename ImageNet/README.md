@@ -1,6 +1,8 @@
 # MoEx on ImageNet
 This code is based on [apex's ImageNet example](https://github.com/NVIDIA/apex/blob/master/examples/imagenet/main_amp.py) and [CutMix's official code](https://github.com/clovaai/CutMix-PyTorch/blob/master/train.py). 
 
+Note: Currently, we only provide a code template for ImageNet. We will release the runnable code in a few weeks. 
+
 ## Requirements
 This code was tested on the following versions, but they may not be necessary.
 ```
