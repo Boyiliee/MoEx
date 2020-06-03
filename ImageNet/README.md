@@ -1,7 +1,6 @@
 # MoEx on ImageNet
 This code is based on [apex's ImageNet example](https://github.com/NVIDIA/apex/blob/master/examples/imagenet/main_amp.py) and [CutMix's official code](https://github.com/clovaai/CutMix-PyTorch/blob/master/train.py). 
 
-Note: Currently, we only provide a code template for ImageNet. We will release the runnable code in a few weeks. 
 
 ## Requirements
 This code was tested on the following versions, but they may not be necessary.
@@ -30,3 +29,8 @@ bash run_moex+cutmix_resnet.sh
 ```sh
 bash run_moex_densenet.sh
 ```
+
+## Model Zoo
+[Moex+cutmix_resnet50_20.9](https://drive.google.com/file/d/1cCvhQKV93pY-jj8f5jITywkB9EabiQDA/view?usp=sharing). 
+[Moex_densenet265_20.9](https://drive.google.com/file/d/1qzGORRZ1GLvTZLHj4UlQIvhD2F11aVZ8/view?usp=sharing). 
+
