@@ -39,7 +39,7 @@ class _DenseLayer(nn.Module):
     def bn_function(self, inputs):
         # type: (List[Tensor]) -> Tensor
         concated_features = torch.cat(inputs, 1)
-        bottleneck_output = self.conv1(self.relu1(self.norm1(concated_features)))  # noqa: T484
+        bottleneck_output = self.conv1(self.relu1(self.norm1(concated_features)))
         return bottleneck_output
 
     # todo: rewrite when torchscript supports any
@@ -50,7 +50,7 @@ class _DenseLayer(nn.Module):
                 return True
         return False
 
-    @torch.jit.unused  # noqa: T484
+    @torch.jit.unused
     def call_checkpoint_bottleneck(self, input):
         # type: (List[Tensor]) -> Tensor
         def closure(*inputs):
@@ -58,19 +58,18 @@ class _DenseLayer(nn.Module):
 
         return cp.checkpoint(closure, input)
 
-    @torch.jit._overload_method  # noqa: F811
+    @torch.jit._overload_method 
     def forward(self, input):
         # type: (List[Tensor]) -> (Tensor)
         pass
 
-    @torch.jit._overload_method  # noqa: F811
+    @torch.jit._overload_method  
     def forward(self, input):
         # type: (Tensor) -> (Tensor)
         pass
 
-    # torchscript does not yet support *args, so we overload method
-    # allowing it to take either a List[Tensor] or single Tensor
-    def forward(self, input):  # noqa: F811
+
+    def forward(self, input): 
         if isinstance(input, Tensor):
             prev_features = [input]
         else:
@@ -155,7 +154,7 @@ class MoExDenseNet(nn.Module):
             ('pool0', nn.MaxPool2d(kernel_size=3, stride=2, padding=1)),
         ]))
 
-        # Each denseblock
+     
         num_features = num_init_features
         for i, num_layers in enumerate(block_config):
             block = _DenseBlock(
@@ -205,10 +204,6 @@ class MoExDenseNet(nn.Module):
 
 
 def _load_state_dict(model, model_url, progress):
-    # '.'s are no longer allowed in module names, but previous _DenseLayer
-    # has keys 'norm.1', 'relu.1', 'conv.1', 'norm.2', 'relu.2', 'conv.2'.
-    # They are also in the checkpoints in model_urls. This pattern is used
-    # to find such keys.
     pattern = re.compile(
         r'^(.*denselayer\d+\.(?:norm|relu|conv))\.((?:[12])\.(?:weight|bias|running_mean|running_var))$')
 

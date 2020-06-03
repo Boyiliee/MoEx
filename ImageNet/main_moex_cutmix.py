@@ -141,7 +141,6 @@ print(f'args:\n{args}')
 if args.deterministic:
     cudnn.benchmark = False
     cudnn.deterministic = True
-    # torch.manual_seed(args.local_rank)
     torch.set_printoptions(precision=10)
 
 
@@ -253,8 +252,6 @@ def main():
 
     if (args.arch == "inception_v3"):
         raise RuntimeError("Currently, inception_v3 is not supported by this example.")
-        # crop_size = 299
-        # val_size = 320 # I chose this value arbitrarily, we can adjust.
     else:
         crop_size = args.img_size
         val_size = int(args.img_size * 256 / 224)
@@ -333,7 +330,6 @@ def main():
             writer.add_scalar('eval/best_prec1', best_prec1, epoch + 1)
     if args.local_rank == 0:
         print(f'Final best_epoch: {best_epoch} best_val_acc: {best_prec1:.4f}')
-        # writer.export_scalars_to_json(os.path.join(args.output_dir, "all_scalars.json"))
         writer.close()
 
 
@@ -343,10 +339,7 @@ class data_prefetcher():
         self.stream = torch.cuda.Stream()
         self.mean = torch.tensor([0.485 * 255, 0.456 * 255, 0.406 * 255]).cuda().view(1, 3, 1, 1)
         self.std = torch.tensor([0.229 * 255, 0.224 * 255, 0.225 * 255]).cuda().view(1, 3, 1, 1)
-        # With Amp, it isn't necessary to manually convert data to half.
-        # if args.fp16:
-        #     self.mean = self.mean.half()
-        #     self.std = self.std.half()
+
         self.preload()
 
     def preload(self):
@@ -356,27 +349,11 @@ class data_prefetcher():
             self.next_input = None
             self.next_target = None
             return
-        # if record_stream() doesn't work, another option is to make sure device inputs are created
-        # on the main stream.
-        # self.next_input_gpu = torch.empty_like(self.next_input, device='cuda')
-        # self.next_target_gpu = torch.empty_like(self.next_target, device='cuda')
-        # Need to make sure the memory allocated for next_* is not still in use by the main stream
-        # at the time we start copying to next_*:
-        # self.stream.wait_stream(torch.cuda.current_stream())
+
         with torch.cuda.stream(self.stream):
             self.next_input = self.next_input.cuda(non_blocking=True)
             self.next_target = self.next_target.cuda(non_blocking=True)
-            # more code for the alternative if record_stream() doesn't work:
-            # copy_ will record the use of the pinned source tensor in this side stream.
-            # self.next_input_gpu.copy_(self.next_input, non_blocking=True)
-            # self.next_target_gpu.copy_(self.next_target, non_blocking=True)
-            # self.next_input = self.next_input_gpu
-            # self.next_target = self.next_target_gpu
 
-            # With Amp, it isn't necessary to manually convert data to half.
-            # if args.fp16:
-            #     self.next_input = self.next_input.half()
-            # else:
             self.next_input = self.next_input.float()
             self.next_input = self.next_input.sub_(self.mean).div_(self.std)
 
@@ -490,18 +467,11 @@ def train(train_loader, model, criterion, optimizer, epoch):
             scaled_loss.backward()
         if args.prof >= 0: torch.cuda.nvtx.range_pop()
 
-        # for param in model.parameters():
-        #     print(param.data.double().sum().item(), param.grad.data.double().sum().item())
-
         if args.prof >= 0: torch.cuda.nvtx.range_push("optimizer.step()")
         optimizer.step()
         if args.prof >= 0: torch.cuda.nvtx.range_pop()
 
         if i % args.print_freq == 0:
-            # Every print_freq iterations, check the loss, accuracy, and speed.
-            # For best performance, it doesn't make sense to print these metrics every
-            # iteration, since they incur an allreduce and some host<->device syncs.
-
             # Measure accuracy
             prec1, prec5 = accuracy(output.data, target_for_acc, topk=(1, 5))
 
@@ -513,7 +483,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
             else:
                 reduced_loss = loss.data
 
-            # to_python_float incurs a host<->device sync
             losses.update(to_python_float(reduced_loss), input.size(0))
             top1.update(to_python_float(prec1), input.size(0))
             top5.update(to_python_float(prec5), input.size(0))
@@ -657,9 +626,6 @@ def adjust_learning_rate(optimizer, epoch, step, len_epoch):
     if epoch < 5:
         lr = lr * float(1 + step + epoch * len_epoch) / (5. * len_epoch)
 
-    # if(args.local_rank == 0):
-    #     print("epoch = {}, step = {}, lr = {}".format(epoch, step, lr))
-
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
 
@@ -673,9 +639,6 @@ def adjust_learning_rate_cosine(optimizer, epoch, step, len_epoch):
         t = (epoch - 5) * len_epoch + step - 1
         T = (args.epochs - 5) * len_epoch
         lr = args.min_lr + (args.lr - args.min_lr) * 0.5 * (1. + math.cos(t * math.pi / T))
-
-    # if(args.local_rank == 0):
-    #     print("epoch = {}, step = {}, lr = {}".format(epoch, step, lr))
 
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
@@ -723,7 +686,6 @@ def rand_bbox(size, lam):
     return bbx1, bby1, bbx2, bby2
 
 
-# ref: https://github.com/pytorch/pytorch/issues/7455
 class LabelSmoothLoss(nn.Module):
     def __init__(self, smoothing=0.0):
         super(LabelSmoothLoss, self).__init__()
