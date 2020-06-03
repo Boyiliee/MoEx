@@ -259,16 +259,6 @@ def main():
         crop_size = args.img_size
         val_size = int(args.img_size * 256 / 224)
 
-    # try:
-    #     train_dataset = ImageFolderIndex(
-    #         '/private/home/felixwu/projects/amdim-public/index/in_train_full.pt',
-    #         transforms.Compose([
-    #             transforms.RandomResizedCrop(crop_size),
-    #             transforms.RandomHorizontalFlip(),
-    #             # transforms.ToTensor(), Too slow
-    #             # normalize,
-    #         ]))
-    # except:
     train_dataset = datasets.ImageFolder(
         traindir,
         transforms.Compose([
