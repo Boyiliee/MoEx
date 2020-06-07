@@ -31,7 +31,29 @@ bash run_moex_densenet.sh
 ```
 
 ## Model Zoo
-[Moex+cutmix_resnet50_20.9](https://drive.google.com/file/d/1cCvhQKV93pY-jj8f5jITywkB9EabiQDA/view?usp=sharing)
-
-[Moex_densenet265_20.9](https://drive.google.com/file/d/1qzGORRZ1GLvTZLHj4UlQIvhD2F11aVZ8/view?usp=sharing)
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <td>Error Rate</td>
+      <th>url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Moex+cutmix_resnet50</td>
+      <td>20.9</td>
+      <td><a href="https://drive.google.com/file/d/1cCvhQKV93pY-jj8f5jITywkB9EabiQDA/view?usp=sharing">download</a></td>
+    </tr>
+  </tbody>
+    <tr>
+      <th>1</th>
+      <td>Moex_densenet265</td>
+      <td>20.9</td>
+      <td><a href="https://drive.google.com/file/d/1qzGORRZ1GLvTZLHj4UlQIvhD2F11aVZ8/view?usp=sharing">download</a></td>
+    </tr>
+  </tbody>
+</table>
 
