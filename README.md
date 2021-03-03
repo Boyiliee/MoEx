@@ -1,6 +1,8 @@
 # MoEx (Moment Exchange)
 The official PyTorch implementation of the paper [On Feature Normalization and Data Augmentation](https://arxiv.org/abs/2002.11102).
 
+CVPR 2021
+
 #### Authors: 
 * [Boyi Li](https://sites.google.com/site/boyilics/home)*
 * [Felix Wu](https://scholar.google.com.tw/citations?user=sNL8SSoAAAAJ&hl=en)*
