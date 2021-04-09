@@ -17,12 +17,12 @@ This repo contains the PyTorch implementation of Moment Exchange (MoEx), describ
 
 ![](./figs/fig1.jpg)
 
+#### Usage
+Please follow the instructions in the `README.md` in each subfolder to run experiments with MoEx on [CIFAR](./CIFAR), [ImageNet](./ImageNet), and [ModelNet10/40](./ModelNet).
+
 ### Explorations beyond our paper
 #### Methods for COVID‐19
 * A Cascade‐SEME network for COVID‐19 detection in chest c‐ray images: [Paper](https://aapm.onlinelibrary.wiley.com/doi/full/10.1002/mp.14711?casa_token=y2QQkxTWYD0AAAAA%3AXwClYvwCDmRd4djy_i5Ps0qL64R5mwqlTRhGJCqn-pvzaxsTGuS9C_5f4wlb6M1-jAEJKftiU9BwwZfe)
-
-#### Usage
-Please follow the instructions in the `README.md` in each subfolder to run experiments with MoEx on [CIFAR](./CIFAR), [ImageNet](./ImageNet), and [ModelNet10/40](./ModelNet).
 
 More information and relevant applications will be updated.
 
