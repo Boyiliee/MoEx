@@ -1,5 +1,5 @@
 # MoEx (Moment Exchange)
-The official PyTorch implementation of the paper [On Feature Normalization and Data Augmentation](https://arxiv.org/abs/2002.11102).
+The official PyTorch implementation of the paper [On Feature Normalization and Data Augmentation](https://openaccess.thecvf.com/content/CVPR2021/papers/Li_On_Feature_Normalization_and_Data_Augmentation_CVPR_2021_paper.pdf).
 
 CVPR 2021
 
