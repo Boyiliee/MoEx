@@ -28,11 +28,12 @@ More information and relevant applications will be updated.
 
 If you find this repo useful, please cite:
 ```
-@article{li2020feature,
-  title={On Feature Normalization and Data Augmentation},
+@inproceedings{li2021feature,
+  title={On feature normalization and data augmentation},
   author={Li, Boyi and Wu, Felix and Lim, Ser-Nam and Belongie, Serge and Weinberger, Kilian Q},
-  journal={arXiv preprint arXiv:2002.11102},
-  year={2020}
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={12383--12392},
+  year={2021}
 }
 
 @inproceedings{li2019positional,
